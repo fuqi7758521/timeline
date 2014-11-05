@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="true"/>
+    </settings>
+    
+	<typeAliases>
+  		<typeAlias alias="UserTO" type="com.hofuqi.timeline.common.to.UserTO"/>
+  		<typeAlias alias="UserCriteria" type="com.hofuqi.timeline.common.criteria.UserCriteria"/>
+  		
+  		<typeAlias alias="PlanTO" type="com.hofuqi.timeline.common.to.PlanTO"/>
+  		<typeAlias alias="PlanCriteria" type="com.hofuqi.timeline.common.criteria.PlanCriteria"/>
+  		
+  		<typeAlias alias="ItemTO" type="com.hofuqi.timeline.common.to.ItemTO"/>
+  		<typeAlias alias="ItemCriteria" type="com.hofuqi.timeline.common.criteria.ItemCriteria"/>
+  		
+	</typeAliases>
+	
+</configuration>

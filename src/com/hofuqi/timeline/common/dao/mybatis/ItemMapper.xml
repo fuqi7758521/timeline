@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hofuqi.timeline.common.dao.ItemDAO">
+    
+   <insert id="add" parameterType="ItemTO" useGeneratedKeys="true" keyProperty="id">
+        insert into item (plan_id, start_time, end_time, created_date, remark)
+        values
+        (#{planId}, #{startTime}, #{endTime}, now(), #{remark})
+    </insert>
+    
+    <update id="update" parameterType="ItemTO">
+        update item set
+         <if test="startTime != null">
+	        start_time = #{startTime},
+	    </if>
+         <if test="endTime != null">
+	        end_time = #{endTime},
+	    </if>
+         <if test="remark != null">
+	        remark = #{remark},
+	    </if>
+	    ID = ID
+	    where ID = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="long">
+        delete from item where id=#{id}
+    </delete>
+    
+    <select id="getItem" parameterType="ItemCriteria" resultType="ItemTO">
+        select id, plan_id planId, created_date createdDate, start_time startTime, end_time endTime, remark from item
+        where 1=1
+        <if test="id != null and id != 0"> and id=#{id}</if>
+    </select>
+    
+    <select id="getItems" parameterType="ItemCriteria" resultType="ItemTO">
+        select id, plan_id planId, created_date createdDate, start_time startTime, end_time endTime, remark from item
+        where 1=1
+        <if test="id != null and id != 0"> and id=#{id}</if>
+        <if test="planId != null and planId != 0"> and plan_id=#{planId}</if>
+        <if test="startTime != null and startTime != ''"> and created_date &lt;= #{startTime}</if>
+        <if test="endTime != null and endTime != '' "> and created_date &lt;= #{endTime}</if>
+        order by created_date desc
+        <if test="pageModel != null and pageModel.pageSize != 0">
+		     limit #{pageModel.offset}, #{pageModel.pageSize}
+	    </if>
+    </select>
+    
+        <select id="getSumMinsItemsOfTime" parameterType="Long" resultType="Long">
+        select sum(TIMESTAMPDIFF(MINUTE,  start_time, end_time)) from item
+        where  plan_id=#{planId}
+    </select>
+    
+    <select id="getItemsCnt" parameterType="ItemCriteria" resultType="int">
+        select count(id) from item
+        where 1=1
+        <if test="id != null and id != 0"> and id=#{id}</if>
+        <if test="planId != null and planId != 0"> and plan_id=#{planId}</if>
+        <if test="startTime != null and startTime != ''"> and created_date &lt;= #{startTime}</if>
+        <if test="endTime != null and endTime != ''"> and created_date &lt;= #{endTime}</if>
+    </select>
+    
+    <select id="getItemsChart" parameterType="ItemCriteria" resultType="ItemTO">
+        select DATE_FORMAT(created_date,'%Y-%m-%d') createdDate, sum((UNIX_TIMESTAMP(end_time) - UNIX_TIMESTAMP(start_time))) diffSec from item
+		where plan_id=#{planId}
+        <if test="startTime != null and startTime != ''"> and created_date &gt;= #{startTime}</if>
+        <if test="endTime != null and endTime != ''"> and created_date &lt; #{endTime}</if>
+		group by DATE_FORMAT(created_date,'%Y-%m-%d') 
+		order by DATE_FORMAT(created_date,'%Y-%m-%d') asc
+    </select>
+    
+</mapper>
