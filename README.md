@@ -11,5 +11,8 @@ your can try it ,  http://timline.jd-app.com.
 You can register or use a guest account <br>
 username:  <b>fuqi</b> <br>
 password: <b>fuqi</b>   
+twitter:https://twitter.com/fuqi7758521
+
 
 #For fun!
+
