@@ -1,6 +1,7 @@
 package com.hofuqi.timeline.ui.web;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -133,7 +134,17 @@ public class ItemController {
 			item.setEndTime(null);
 		}
 		itemService.add(item);
+		
+		updatePlanTOUpdatedDate(item);
+		
 		return new ModelAndView("redirect:items.html?planId=" + item.getPlanId());
+	}
+	
+	private void updatePlanTOUpdatedDate(ItemTO item) {
+		PlanTO planTO = new PlanTO();
+		planTO.setId(item.getPlanId());
+		planTO.setUpdatedDate(new Date());
+		planService.update(planTO );
 	}
 	
 	//更新条目
@@ -156,6 +167,9 @@ public class ItemController {
 			item.setEndTime(null);
 		}
 		itemService.update(item);
+		
+		updatePlanTOUpdatedDate(item);
+		
 		return new ModelAndView("redirect:items.html?planId=" + item.getPlanId());
 	}
 	

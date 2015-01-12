@@ -3,10 +3,10 @@
 
 <configuration>
     
-    <settings>
+<!--     <settings>
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="true"/>
-    </settings>
+    </settings> -->
     
 	<typeAliases>
   		<typeAlias alias="UserTO" type="com.hofuqi.timeline.common.to.UserTO"/>

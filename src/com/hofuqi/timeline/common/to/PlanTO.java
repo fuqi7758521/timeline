@@ -25,6 +25,8 @@ public class PlanTO implements Serializable {
 
 	private Date createdDate;
 
+	private Date updatedDate;
+
 	private Integer status;
 
 	public Long getId() {
@@ -81,6 +83,14 @@ public class PlanTO implements Serializable {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 }

@@ -24,6 +24,9 @@
          <if test="icon != null">
 	        icon = #{icon},
 	    </if>
+        <if test="updatedDate != null">
+	        updated_date = #{updatedDate},
+	    </if>
 	    ID = ID
 	    where ID = #{id}
     </update>
@@ -52,7 +55,7 @@
         <if test="id != null and id != 0"> and id=#{id}</if>
         <if test="userId != null and userId != 0"> and user_id=#{userId}</if>
         <if test="content != null and content != ''"> and content like CONCAT('%', #{content}, '%')</if>
-        order by created_date desc
+        order by updated_date desc
         <if test="pageModel.pageSize != 0">
 		     limit #{pageModel.offset}, #{pageModel.pageSize}
 	    </if>
